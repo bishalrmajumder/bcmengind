@@ -170,7 +170,9 @@
       justify-content: center;
       align-items: flex-start;
       padding: 0 8%;
-      max-width: 1200px;
+      max-width: 1600px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .badge {
@@ -208,8 +210,10 @@
     /* CTAs */
     .cta-container {
       display: flex;
+      justify-content: center;
       gap: 1.5rem;
       flex-wrap: wrap;
+      margin-top: 4rem;
     }
 
     .btn {
@@ -253,6 +257,9 @@
     /* History Timeline Section */
     .content-section {
       padding: 6rem 8%;
+      max-width: 1600px;
+      margin: 0 auto;
+      box-sizing: border-box;
     }
 
     .section-title {
@@ -268,6 +275,7 @@
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
       gap: 2rem;
+      width: 100%;
     }
 
     .history-card {
@@ -322,6 +330,18 @@
       background: rgba(5, 5, 7, 0.95);
     }
 
+    footer a {
+      color: var(--text-muted);
+      text-decoration: none;
+      border-bottom: 1px solid transparent;
+      transition: color 0.3s, border-color 0.3s;
+    }
+
+    footer a:hover {
+      color: #ffffff;
+      border-color: #ffffff;
+    }
+
     @media (min-width: 769px) {
       .brand-logo img {
         height: 52px;
@@ -362,9 +382,18 @@
 
       .hero {
         padding: 0 6%;
+        min-height: auto;
+        padding-top: 3.5rem;
+        padding-bottom: 1rem;
       }
       .hero h1 {
         font-size: 2.4rem;
+      }
+      .content-section {
+        padding: 2rem 6% 4rem;
+      }
+      .section-title {
+        margin-bottom: 2rem;
       }
       .btn {
         width: 100%;
@@ -380,7 +409,7 @@
 
   <div class="ui-layer">
     <header>
-      <a href="https://hindustanenterprise.net/home/bcmengineeringindia/" class="brand-logo" aria-label="BCM Engineering India Home">
+      <a href="https://bcmengind.in" class="brand-logo" aria-label="BCM Engineering India Home">
         <!-- Direct Direct Image Link with Fixed Aspect Ratio -->
         <img 
           src="https://hindustanenterprise.net/wp-content/uploads/2026/08/BCM-Logo-BLACK-2-300x189-removebg-preview.png" 
@@ -397,30 +426,21 @@
 
       <!-- Navigation Menu -->
       <nav id="navMenu">
-        <a href="https://hindustanenterprise.net/home/bcmengineeringindia/" class="active">Home</a>
-        <a href="https://hindustanenterprise.net/home/bcmengineeringindia/products/">Products</a>
-        <a href="https://hindustanenterprise.net/home/bcmengineeringindia/bcmei-contact-us/">Contact Us</a>
-        <a id="priceListBtn" href="https://hindustanenterprise.net/wp-content/uploads/2026/01/PL-1-1-26.pdf">Price List</a>
+        <a href="https://bcmengind.in" class="active">Home</a>
+        <a href="https://products.bcmengind.in">Products</a>
+        <a href="https://contactus.bcmengind.in">Contact Us</a>
+        <a id="priceListBtn" href="https://pricelist.bcmengind.in">Price List</a>
       </nav>
     </header>
 
     <main class="hero">
-      <div class="badge">A UNIT OF HINDUSTAN ENTERPRISE • SINCE 1971</div>
-      <h1>Complete Welding<br>Solutions</h1>
-      <p>Precision-engineered welding electrodes, heavy gas cutting consumables, and industrial equipment built for extreme durability.</p>
-
-      <div class="cta-container">
-        <!-- Explore Products Route -->
-        <a href="https://hindustanenterprise.net/home/bcmengineeringindia/products/" class="btn btn-solid">Explore Products</a>
-        
-        <!-- WhatsApp Request Quote Route -->
-        <a href="https://wa.me/916289232792?text=Hello%20BCM%20Engineering%20India,%20I%20would%20like%20to%20request%20a%20quote." target="_blank" class="btn btn-outline">Request Quote</a>
-      </div>
+      <div class="badge">WELCOME TO</div>
+      <h1>BCM Engineering India</h1>
+      <p>Manufacturers of precision-engineered welding electrodes, heavy gas cutting consumables, and industrial equipment built for extreme durability. A unit of Hindustan Enterprise providing complete welding solutions since 1971</p>
     </main>
 
-    <!-- History Of Us Section -->
     <section class="content-section">
-      <h2 class="section-title">History Of Us</h2>
+      <h2 class="section-title">Who Are We ?</h2>
       <div class="history-timeline">
         <div class="history-card">
           <div class="history-year">1971</div>
@@ -438,10 +458,18 @@
           <p>Mr. Bishal Raj Majumder stepped in to establish our direct manufacturing division, bringing quality welding products worldwide.</p>
         </div>
       </div>
+
+      <div class="cta-container">
+        <!-- Explore Products Route -->
+        <a href="https://products.bcmengind.in" class="btn btn-solid">Explore Products</a>
+
+        <!-- WhatsApp Request Quote Route -->
+        <a href="https://wa.me/916289232792?text=Hello%20BCM%20Engineering%20India,%20I%20would%20like%20to%20request%20a%20quote." target="_blank" class="btn btn-outline">Request Quote</a>
+      </div>
     </section>
 
     <footer>
-      <p>© 2026 BCM Engineering India</p>
+      <p>© 2026 Hindustan Enterprise &middot; <a href="https://hindustanenterprise.net/home/hindustanenterpriseprivacypolicy/">Privacy Policy</a></p>
     </footer>
   </div>
 
@@ -493,11 +521,11 @@
       renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
       // Metallic Industrial Core
-      const geometry = new THREE.IcosahedronGeometry(2, 1);
+      const geometry = new THREE.IcosahedronGeometry(2, 2);
       const material = new THREE.MeshStandardMaterial({
         color: 0x22222a,
-        metalness: 0.9,
-        roughness: 0.2
+        metalness: 0.55,
+        roughness: 0.6
       });
       coreMesh = new THREE.Mesh(geometry, material);
       scene.add(coreMesh);
@@ -527,23 +555,24 @@
       
       const particleMat = new THREE.PointsMaterial({
         color: 0xffffff,
-        size: 0.05,
+        size: 0.035,
+        sizeAttenuation: true,
         transparent: true,
-        opacity: 0.8
+        opacity: 0.5
       });
 
       sparkParticles = new THREE.Points(particleGeo, particleMat);
       scene.add(sparkParticles);
 
       // Lighting Setup
-      const ambientLight = new THREE.AmbientLight(0xffffff, 0.2);
+      const ambientLight = new THREE.AmbientLight(0xffffff, 0.35);
       scene.add(ambientLight);
 
-      const mainLight = new THREE.DirectionalLight(0xffffff, 1.8);
+      const mainLight = new THREE.DirectionalLight(0xffffff, 0.7);
       mainLight.position.set(5, 5, 5);
       scene.add(mainLight);
 
-      const blueRimLight = new THREE.PointLight(0xffffff, 2, 10);
+      const blueRimLight = new THREE.PointLight(0xffffff, 0.5, 10);
       blueRimLight.position.set(-5, -2, -2);
       scene.add(blueRimLight);
 

@@ -535,6 +535,85 @@
     .policy-credit { margin-top: 2.4rem; padding-top: 1.4rem; border-top: 1px solid var(--border-color); font-size: 0.95rem; color: var(--text-muted); }
     .policy-back { margin-top: 1rem; }
 
+    /* ========== DIWALI WELCOME SPLASH ========== */
+    body.splash-lock { overflow: hidden; }
+    #splash {
+      position: fixed; inset: 0; z-index: 5000; overflow: hidden;
+      display: flex; align-items: center; justify-content: center; text-align: center;
+      background:
+        radial-gradient(ellipse 60% 50% at 50% 46%, rgba(122, 42, 18, 0.55) 0%, transparent 70%),
+        radial-gradient(ellipse 120% 70% at 50% 115%, #5A1630 0%, transparent 60%),
+        #0E0414;
+      transition: opacity 0.9s ease, transform 0.9s cubic-bezier(0.16, 1, 0.3, 1), visibility 0.9s;
+    }
+    #splash.leaving { opacity: 0; transform: scale(1.08); visibility: hidden; pointer-events: none; }
+    #splashCanvas { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; }
+
+    /* slowly turning rangoli behind the text */
+    .sp-rangoli {
+      position: absolute; top: 50%; left: 50%; width: min(96vmin, 780px); height: min(96vmin, 780px);
+      opacity: 0.2; z-index: 1; animation: rangoliSpin 70s linear infinite, rangoliIn 2s ease both;
+    }
+    @keyframes rangoliSpin { from { transform: translate(-50%, -50%) rotate(0); } to { transform: translate(-50%, -50%) rotate(360deg); } }
+    @keyframes rangoliIn { from { opacity: 0; } to { opacity: 0.2; } }
+
+    /* marigold toran across the top */
+    .sp-toran { position: absolute; top: 0; left: 0; width: 100%; height: clamp(72px, 12vw, 130px); z-index: 4; filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.45)); }
+    .sp-drop { transform-box: fill-box; transform-origin: 50% 0; animation: dropSway 2.6s ease-in-out infinite alternate; }
+    @keyframes dropSway { from { transform: rotate(-6deg); } to { transform: rotate(6deg); } }
+
+    /* hanging akash kandils */
+    .kandil { position: absolute; top: clamp(30px, 5vw, 60px); width: clamp(44px, 5vw, 64px); z-index: 3; transform-origin: 50% 0; animation: kandilSwing var(--d, 3.4s) ease-in-out infinite alternate; }
+    .kandil svg { width: 100%; height: auto; display: block; overflow: visible; }
+    .kandil .k-glow { animation: glowPulse 1.8s ease-in-out infinite; }
+    @keyframes kandilSwing { from { transform: rotate(-7deg); } to { transform: rotate(7deg); } }
+
+    /* main greeting */
+    .sp-content { position: relative; z-index: 5; padding: 6rem 6% 9rem; display: flex; flex-direction: column; align-items: center; transition: opacity 0.4s ease, transform 0.6s ease; }
+    #splash.bye .sp-content { opacity: 0; transform: scale(0.94); }
+    .sp-logo {
+      height: clamp(48px, 7vw, 70px); width: auto; aspect-ratio: 300 / 189; object-fit: contain;
+      filter: drop-shadow(0 0 10px rgba(255, 240, 210, 0.95)) drop-shadow(0 0 22px rgba(255, 190, 90, 0.55));
+      animation: spRise 0.9s 0.3s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .sp-happy {
+      font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: clamp(1.8rem, 5.5vw, 3.4rem);
+      letter-spacing: 0.35em; color: var(--cream); margin-top: 1.4rem; padding-left: 0.35em;
+      text-shadow: 0 0 24px rgba(255, 170, 60, 0.55);
+      animation: spRise 1s 0.7s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .sp-diwali { font-family: 'Cinzel Decorative', serif; font-weight: 900; font-size: clamp(4.2rem, 17vw, 10.5rem); line-height: 1; margin-top: 0.2rem; white-space: nowrap; }
+    .sp-diwali span {
+      display: inline-block;
+      animation: letterPop 0.9s calc(1.1s + var(--i) * 0.12s) cubic-bezier(0.34, 1.56, 0.64, 1) both, shimmerText 5s linear infinite;
+    }
+    @keyframes letterPop { from { opacity: 0; transform: translateY(60px) scale(0.4) rotate(-12deg); } to { opacity: 1; transform: none; } }
+    @keyframes spRise { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: none; } }
+    .sp-wish {
+      font-size: clamp(1.1rem, 2.4vw, 1.45rem); font-weight: 600; color: var(--cream); max-width: 34ch; line-height: 1.45; margin-top: 1.4rem;
+      animation: spRise 1s 2.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .sp-from {
+      font-family: 'Orbitron', sans-serif; font-size: clamp(0.68rem, 1.4vw, 0.85rem); letter-spacing: 3px; text-transform: uppercase; color: var(--gold-soft); margin-top: 0.9rem;
+      animation: spRise 1s 2.5s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .btn.sp-visit {
+      width: auto; margin-top: 2.2rem; border-radius: 999px; padding: 1.1rem 3rem; font-size: 0.95rem;
+      animation: spRise 1s 3s cubic-bezier(0.16, 1, 0.3, 1) both, visitGlow 2s 4s ease-in-out infinite;
+    }
+    @keyframes visitGlow { 0%,100% { box-shadow: 0 0 22px rgba(255, 201, 77, 0.45); } 50% { box-shadow: 0 0 55px rgba(255, 150, 50, 0.95), 0 0 0 6px rgba(255, 201, 77, 0.15); } }
+
+    /* diyas along the bottom */
+    .sp-diyas { position: absolute; bottom: 14px; left: 0; right: 0; justify-content: center; z-index: 3; gap: clamp(0.6rem, 2.4vw, 2rem); animation: spRise 1.2s 0.2s ease both; }
+    .sp-diyas .diya { width: clamp(46px, 6vw, 76px); height: auto; filter: drop-shadow(0 0 14px rgba(255, 170, 60, 0.6)); }
+    .sp-diyas .diya:nth-child(2n) .flame { animation-duration: 1.35s; }
+    .sp-diyas .diya:nth-child(3n) .flame { animation-duration: 0.95s; }
+
+    @media (max-width: 700px) {
+      .kandil.k-wide, .sp-diyas .diya.d-wide { display: none; }
+      .sp-content { padding: 5rem 6% 7rem; }
+    }
+
     /* ========== RESPONSIVE ========== */
     @media (min-width: 769px) { .brand-logo img { height: 52px; } }
     @media (max-width: 768px) {
@@ -570,6 +649,27 @@
   </style>
 </head>
 <body>
+
+  <!-- ===================== DIWALI WELCOME SPLASH (shown when the site opens) ===================== -->
+  <div id="splash" role="dialog" aria-modal="true" aria-label="Happy Diwali from BCM Engineering India">
+    <svg class="sp-rangoli" viewBox="-100 -100 200 200" aria-hidden="true"></svg>
+    <canvas id="splashCanvas" aria-hidden="true"></canvas>
+    <svg class="sp-toran" viewBox="0 0 1000 120" preserveAspectRatio="xMidYMin slice" aria-hidden="true"></svg>
+    <div class="sp-kandils" aria-hidden="true"></div>
+
+    <div class="sp-content">
+      <img class="sp-logo" src="https://hindustanenterprise.net/wp-content/uploads/2026/08/BCM-Logo-BLACK-2-300x189-removebg-preview.png" alt="BCM Engineering India" width="300" height="189" />
+      <div class="sp-happy">Happy</div>
+      <div class="sp-diwali" aria-label="Diwali">
+        <span class="gold-text" style="--i:0">D</span><span class="gold-text" style="--i:1">i</span><span class="gold-text" style="--i:2">w</span><span class="gold-text" style="--i:3">a</span><span class="gold-text" style="--i:4">l</span><span class="gold-text" style="--i:5">i</span>
+      </div>
+      <p class="sp-wish">Wishing you &amp; all your loved ones a Diwali full of light, joy, prosperity &amp; success.</p>
+      <p class="sp-from">— Team BCM Engineering India</p>
+      <button type="button" class="btn btn-solid sp-visit" id="visitBtn">Visit Us →</button>
+    </div>
+
+    <div class="diya-row sp-diyas" aria-hidden="true"></div>
+  </div>
 
   <!-- Moving Diwali sky (stars, embers, fireworks) -->
   <canvas id="sky" aria-hidden="true"></canvas>
@@ -1154,6 +1254,8 @@
       }
 
       function frame(t) {
+        // the welcome splash has its own fireworks; rest the background sky until it closes
+        if (document.body.classList.contains('splash-lock')) { requestAnimationFrame(frame); return; }
         ctx.clearRect(0, 0, W, H);
         // stars
         for (const s of stars) {
@@ -1196,6 +1298,224 @@
       window.addEventListener('resize', resize);
       resize();
       requestAnimationFrame(frame);
+    })();
+
+    // ===== Diwali welcome splash: fireworks, anar, chakri, diyas, kandils, toran =====
+    (function diwaliSplash() {
+      const sp = document.getElementById('splash');
+      if (!sp) return;
+      if (location.hash === '#privacy') { sp.remove(); return; }
+      document.body.classList.add('splash-lock');
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // --- Rangoli (geometric mandala) ---
+      (function rangoli() {
+        const svg = sp.querySelector('.sp-rangoli');
+        let s = '';
+        const petal = (r0, r1, w) => `M0,${-r0} Q${w},${-(r0 + r1) / 2} 0,${-r1} Q${-w},${-(r0 + r1) / 2} 0,${-r0}Z`;
+        for (let i = 0; i < 8; i++)  s += `<path d="${petal(10, 36, 11)}" transform="rotate(${i * 45})" fill="rgba(255,201,77,.35)" stroke="#FFC94D" stroke-width="1"/>`;
+        for (let i = 0; i < 16; i++) s += `<path d="${petal(40, 62, 8)}" transform="rotate(${i * 22.5 + 11.25})" fill="rgba(255,138,43,.3)" stroke="#FF8A2B" stroke-width="1"/>`;
+        for (let i = 0; i < 32; i++) s += `<circle cx="0" cy="-72" r="2.6" transform="rotate(${i * 11.25})" fill="#FF5E7A"/>`;
+        for (let i = 0; i < 24; i++) s += `<path d="${petal(78, 92, 5)}" transform="rotate(${i * 15})" fill="none" stroke="#FFD27A" stroke-width="1"/>`;
+        s += `<circle r="66" fill="none" stroke="#FFC94D" stroke-width=".8" stroke-dasharray="2 3"/><circle r="96" fill="none" stroke="#FFC94D" stroke-width=".8"/><circle r="7" fill="#FFC94D"/>`;
+        svg.innerHTML = s;
+      })();
+
+      // --- Marigold toran with mango leaves ---
+      (function toran() {
+        const svg = sp.querySelector('.sp-toran');
+        const swags = 6, w = 1000 / swags;
+        let s = '';
+        for (let k = 0; k < swags; k++) {
+          for (let i = 0; i <= 12; i++) {
+            const t = i / 12, x = (k * w + w * t).toFixed(1), y = (10 + 224 * t * (1 - t)).toFixed(1);
+            s += `<circle cx="${x}" cy="${y}" r="8.5" fill="${i % 2 ? '#FFC21A' : '#FF7A00'}"/><circle cx="${x}" cy="${y}" r="3.4" fill="#B5300F" opacity=".5"/>`;
+          }
+        }
+        const leaf = 'M0 0 C7 7 7 20 0 30 C-7 20 -7 7 0 0Z';
+        for (let k = 0; k <= swags; k++) {
+          const x = k * w;
+          s += `<g class="sp-drop" style="animation-delay:-${(k * 0.45).toFixed(2)}s">
+                  <path d="${leaf}" transform="translate(${x - 3},8) rotate(28)" fill="#2F8F3E"/>
+                  <path d="${leaf}" transform="translate(${x + 3},8) rotate(-28)" fill="#3BA34B"/>
+                  <line x1="${x}" y1="10" x2="${x}" y2="78" stroke="#FFD27A" stroke-width="1.2"/>
+                  <circle cx="${x}" cy="30" r="6.5" fill="#FF7A00"/><circle cx="${x}" cy="45" r="6.5" fill="#FFC21A"/>
+                  <circle cx="${x}" cy="60" r="6.5" fill="#FF7A00"/><path d="M${x - 6} 70 L${x + 6} 70 L${x} 84Z" fill="#FFC94D"/>
+                </g>`;
+        }
+        svg.innerHTML = s;
+      })();
+
+      // --- Hanging kandils (lanterns) ---
+      (function kandils() {
+        const box = sp.querySelector('.sp-kandils');
+        const list = [
+          { left: '5%',  d: '3.2s', c: '#E8452C', c2: '#FFB84D' },
+          { left: '19%', d: '4.1s', c: '#B5267A', c2: '#FF8FC2', wide: true },
+          { left: '77%', d: '3.7s', c: '#2F7FD8', c2: '#9FD4FF', wide: true },
+          { left: '91%', d: '3.4s', c: '#E07A10', c2: '#FFE07A' }
+        ];
+        box.innerHTML = list.map((k, i) => `
+          <div class="kandil${k.wide ? ' k-wide' : ''}" style="left:${k.left};--d:${k.d};animation-delay:-${i * 0.8}s">
+            <svg viewBox="0 0 60 150">
+              <line x1="30" y1="0" x2="30" y2="46" stroke="#FFD27A" stroke-width="1.5"/>
+              <ellipse class="k-glow" cx="30" cy="80" rx="34" ry="38" fill="${k.c2}" opacity=".3"/>
+              <rect x="22" y="44" width="16" height="7" rx="2" fill="#FFC94D"/>
+              <polygon points="30,50 57,80 30,112 3,80" fill="${k.c}"/>
+              <polygon points="30,60 47,80 30,102 13,80" fill="${k.c2}" opacity=".85"/>
+              <circle cx="30" cy="80" r="5" fill="#FFF4DE"/>
+              <line x1="3" y1="80" x2="57" y2="80" stroke="#FFD27A" stroke-width="1.5"/>
+              <g stroke="#FFC94D" stroke-width="1.6" stroke-linecap="round"><line x1="30" y1="112" x2="30" y2="148"/><line x1="25" y1="108" x2="21" y2="140"/><line x1="35" y1="108" x2="39" y2="140"/></g>
+            </svg>
+          </div>`).join('');
+      })();
+
+      // --- Row of diyas ---
+      (function diyas() {
+        const row = sp.querySelector('.sp-diyas');
+        const diya = '<ellipse class="glow" cx="32" cy="18" rx="16" ry="18" fill="#FFB84D" opacity=".35"></ellipse><path class="flame" d="M32 30 C 22 20 28 8 32 0 C 36 8 42 20 32 30 Z" fill="#FFB84D"></path><path class="flame" d="M32 28 C 27 22 30 14 32 9 C 34 14 37 22 32 28 Z" fill="#FFF1C2"></path><path d="M6 32 Q 6 54 32 54 Q 58 54 58 32 Z" fill="#C2410C"></path><path d="M6 32 Q 32 42 58 32" fill="none" stroke="#FFD27A" stroke-width="2.5"></path>';
+        let s = '';
+        for (let i = 0; i < 7; i++) s += `<svg class="diya${i === 0 || i === 6 ? ' d-wide' : ''}" viewBox="0 0 64 56">${diya}</svg>`;
+        row.innerHTML = s;
+      })();
+
+      // --- Fireworks canvas: rockets, bursts, anar fountains, chakris ---
+      const cv = document.getElementById('splashCanvas');
+      const ctx = cv.getContext('2d');
+      const COLORS = ['#FFC94D', '#FF8A2B', '#FF5E7A', '#7CF0C8', '#B98CFF', '#FFE7B0', '#5EC8FF'];
+      const pick = () => COLORS[(Math.random() * COLORS.length) | 0];
+      let W, H, dpr, small, rockets = [], parts = [], running = !reduce, nextLaunch = 0;
+
+      function resize() {
+        dpr = Math.min(window.devicePixelRatio || 1, 2);
+        W = window.innerWidth; H = window.innerHeight; small = W < 700;
+        cv.width = W * dpr; cv.height = H * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      }
+      function launch(x) {
+        x = x ?? W * (0.12 + Math.random() * 0.76);
+        const ty = H * (0.08 + Math.random() * 0.3);
+        rockets.push({ x, y: H, vx: (Math.random() - 0.5) * 1.4, vy: -Math.sqrt(2 * 0.09 * (H - ty)), c: pick() });
+      }
+      function burst(x, y) {
+        const type = ['peony', 'ring', 'willow', 'double', 'crackle'][(Math.random() * 5) | 0];
+        const c = type === 'willow' ? '#FFC94D' : pick(), c2 = pick();
+        const n = small ? 55 : 95;
+        for (let i = 0; i < n; i++) {
+          const a = (i / n) * Math.PI * 2 + Math.random() * 0.08;
+          let sp = type === 'ring' ? 3.4 : 1 + Math.random() * 3.6;
+          if (type === 'willow') sp *= 0.85;
+          parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1,
+            decay: type === 'willow' ? 0.006 + Math.random() * 0.004 : 0.011 + Math.random() * 0.012,
+            g: type === 'willow' ? 0.05 : 0.04, s: 2, c: type === 'double' && i % 2 ? c2 : c, fl: type === 'crackle' });
+        }
+        if (type === 'double' || type === 'ring') {
+          for (let i = 0; i < 30; i++) {
+            const a = (i / 30) * Math.PI * 2;
+            parts.push({ x, y, vx: Math.cos(a) * 1.4, vy: Math.sin(a) * 1.4, life: 1, decay: 0.018, g: 0.03, s: 2, c: '#FFF4DE' });
+          }
+        }
+        parts.push({ x, y, vx: 0, vy: 0, life: 0.6, decay: 0.09, g: 0, s: 26, c: '#FFE7B0', dot: true }); // flash
+      }
+      function fountain(x, y) { // anar
+        for (let i = 0; i < (small ? 3 : 5); i++) {
+          const a = -Math.PI / 2 + (Math.random() - 0.5) * 0.5, sp = 4 + Math.random() * 5;
+          parts.push({ x, y, vx: Math.cos(a) * sp, vy: Math.sin(a) * sp, life: 1, decay: 0.017 + Math.random() * 0.012,
+            g: 0.1, s: 1.5, c: Math.random() < 0.5 ? '#FFE7B0' : '#FFC94D' });
+        }
+      }
+      function chakri(x, y, t, dir) { // spinning wheel
+        const base = t * 0.014 * dir;
+        for (let k = 0; k < 3; k++) {
+          const a = base + k * 2.094;
+          parts.push({ x: x + Math.cos(a) * 7, y: y + Math.sin(a) * 7,
+            vx: Math.cos(a + dir * 1.45) * 3.4, vy: Math.sin(a + dir * 1.45) * 3.4,
+            life: 1, decay: 0.045, g: 0.03, s: 1.6, c: k === 0 ? '#FF5E7A' : k === 1 ? '#FFC94D' : '#7CF0C8' });
+        }
+      }
+      function drawBases(t) {
+        ctx.globalCompositeOperation = 'source-over';
+        for (const x of [W * 0.05, W * 0.95]) { // anar cones
+          ctx.fillStyle = '#B5300F';
+          ctx.beginPath(); ctx.moveTo(x - 10, H); ctx.lineTo(x + 10, H); ctx.lineTo(x + 4, H - 18); ctx.lineTo(x - 4, H - 18); ctx.closePath(); ctx.fill();
+          ctx.fillStyle = '#FFC94D'; ctx.fillRect(x - 8, H - 9, 16, 3);
+        }
+        if (!small) for (const [x, dir] of [[W * 0.2, 1], [W * 0.8, -1]]) { // chakri hubs
+          ctx.fillStyle = '#7A2A12'; ctx.strokeStyle = '#FFC94D'; ctx.lineWidth = 2;
+          ctx.beginPath(); ctx.arc(x, H - 26, 7, 0, 7); ctx.fill(); ctx.stroke();
+        }
+      }
+
+      function frame(t) {
+        if (!running) return;
+        ctx.clearRect(0, 0, W, H);
+        ctx.globalCompositeOperation = 'lighter';
+        ctx.lineCap = 'round';
+
+        if (t > nextLaunch) {
+          launch(); if (Math.random() < 0.5) launch();
+          nextLaunch = t + (small ? 750 : 480) + Math.random() * 900;
+        }
+        fountain(W * 0.05, H - 18); fountain(W * 0.95, H - 18);
+        if (!small) { chakri(W * 0.2, H - 26, t, 1); chakri(W * 0.8, H - 26, t, -1); }
+
+        for (let i = rockets.length - 1; i >= 0; i--) {
+          const r = rockets[i];
+          r.vy += 0.09; r.x += r.vx; r.y += r.vy;
+          parts.push({ x: r.x, y: r.y, vx: (Math.random() - 0.5) * 0.4, vy: 0.6, life: 0.7, decay: 0.05, g: 0.02, s: 1.4, c: '#FFD27A' });
+          ctx.globalAlpha = 1; ctx.fillStyle = '#FFF4DE';
+          ctx.beginPath(); ctx.arc(r.x, r.y, 2.2, 0, 7); ctx.fill();
+          if (r.vy >= -0.8) { burst(r.x, r.y); rockets.splice(i, 1); }
+        }
+
+        for (let i = parts.length - 1; i >= 0; i--) {
+          const p = parts[i];
+          p.vx *= 0.985; p.vy = p.vy * 0.985 + p.g; p.x += p.vx; p.y += p.vy; p.life -= p.decay;
+          if (p.life <= 0) { parts.splice(i, 1); continue; }
+          const a = p.fl ? (Math.random() < 0.5 ? p.life : 0.08) : p.life;
+          if (p.dot) {
+            const g = ctx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.s);
+            g.addColorStop(0, `rgba(255,231,176,${a * 0.6})`); g.addColorStop(1, 'rgba(255,231,176,0)');
+            ctx.globalAlpha = 1; ctx.fillStyle = g; ctx.beginPath(); ctx.arc(p.x, p.y, p.s, 0, 7); ctx.fill();
+          } else {
+            ctx.globalAlpha = a; ctx.strokeStyle = p.c; ctx.lineWidth = p.s;
+            ctx.beginPath(); ctx.moveTo(p.x - p.vx * 3, p.y - p.vy * 3); ctx.lineTo(p.x, p.y); ctx.stroke();
+          }
+        }
+        const cap = small ? 900 : 2200;
+        if (parts.length > cap) parts.splice(0, parts.length - cap);
+
+        ctx.globalAlpha = 1;
+        drawBases(t);
+        requestAnimationFrame(frame);
+      }
+
+      resize();
+      window.addEventListener('resize', resize);
+      if (running) requestAnimationFrame(frame);
+
+      // --- "Visit Us": grand finale, then open the website ---
+      const visitBtn = document.getElementById('visitBtn');
+      function enter() {
+        if (sp.classList.contains('bye')) return;
+        sp.classList.add('bye');
+        if (running) for (let i = 0; i < 6; i++) setTimeout(() => burst(W * (0.12 + Math.random() * 0.76), H * (0.12 + Math.random() * 0.4)), i * 120);
+        setTimeout(() => {
+          sp.classList.add('leaving');
+          document.body.classList.remove('splash-lock');
+          window.scrollTo({ top: 0, behavior: 'instant' });
+        }, reduce ? 0 : 650);
+        setTimeout(() => {
+          running = false;
+          window.removeEventListener('resize', resize);
+          document.removeEventListener('keydown', onKey);
+          sp.remove();
+        }, reduce ? 950 : 1600);
+      }
+      function onKey(e) { if (e.key === 'Escape' || e.key === 'Enter') enter(); }
+      visitBtn.addEventListener('click', enter);
+      document.addEventListener('keydown', onKey);
+      setTimeout(() => { try { visitBtn.focus({ preventScroll: true }); } catch (e) {} }, 3200);
     })();
   </script>
 </body>
